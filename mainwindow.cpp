@@ -16,8 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     player->setVideoOutput(videoWidget);
 
-    timer->setInterval(1000);
+    timer->setInterval(500);
 
+    connect(player, &QMediaPlayer::stateChanged, this, &MainWindow::onStateChanged);
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTimeLabel);
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::onPlayButtonClicked);
 //    connect(ui->stopButton, &QPushButton::clicked, player, &QMediaPlayer::stop);
@@ -33,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
     initializeUI();
     qDebug() << "Current working directory:" << QDir::currentPath();
     bool styleSheetLoaded=loadStyleSheet();
+}
+
+void MainWindow::onStateChanged(QMediaPlayer::State newState) {
+    if(newState==QMediaPlayer::StoppedState) {
+        timer->stop();
+        QTime time = QTime::fromMSecsSinceStartOfDay(0);
+        ui->timeLabel->setText(time.toString("hh:mm:ss").append("/"+time.toString("hh:mm:ss")));
+        qDebug()<<"Video stopped\n";
+    }
 }
 
 void MainWindow::updateTimeLabel() {
@@ -85,11 +95,13 @@ bool MainWindow::loadStyleSheet()
         ui->stopButton->setStyleSheet(styleSheet);
         ui->centralwidget->setStyleSheet(styleSheet);
         ui->timeLabel->setStyleSheet(styleSheet);
+        ui->seekSlider->setStyleSheet(styleSheet);
         ui->playButton->setObjectName("PlaybackButton");
         ui->pauseButton->setObjectName("PlaybackButton");
         ui->stopButton->setObjectName("PlaybackButton");
         ui->centralwidget->setObjectName("centralWidget");
         ui->timeLabel->setObjectName("TimeAndDuration");
+        ui->seekSlider->setObjectName("seekSlider");
         styleFile.close();
         return true;
     }

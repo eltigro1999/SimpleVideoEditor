@@ -30,6 +30,7 @@ private:
     void initializeUI();
 
 private slots:
+    void onStateChanged(QMediaPlayer::State newState);
     void updateTimeLabel();
     void onPlayButtonClicked();
     void changeVolume(const int& volume);

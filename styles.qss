@@ -2,7 +2,6 @@ QPushButton#PlaybackButton {
 border-radius: 6px;
 background-color: #DEE5E5;
 height: 20px;
-transition: background-color 0.4s ease;
 }
 QPushButton#PlaybackButton:hover {
 background-color: black;
@@ -15,4 +14,26 @@ background-color:black;
 
 QLabel#TimeAndDuration{
 color: #DEE5E5;
+}
+
+QSlider#seekSlider {
+    background: #C0C0C0; /* Background color of the slider track */
+    height: 10px; /* Height of the slider track */
+}
+
+QSlider#seekSlider::groove:horizontal {
+    background:#DEE5E5;  /* Border color of the groove (track) */
+    height: 10px; /* Height of the groove (track) */
+}
+
+QSlider#seekSlider::handle:horizontal {
+    background: #087E8B; /* Color of the slider handle */
+    border-radius: 7px;
+    width: 20px; /* Width of the slider handle */
+    margin: -5px 0; /* Adjust the position of the handle within the groove */
+}
+
+QSlider#seekSlider::handle:horizontal:hover {
+    background: #0056b3; /* Color of the slider handle on hover */
+    border: 1px solid #0056b3; /* Border color of the slider handle on hover */
 }

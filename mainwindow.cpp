@@ -4,18 +4,22 @@
 #include <QFile>
 #include <QLatin1String>
 #include <iostream>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
       player(new QMediaPlayer()),
-      videoWidget(new MyVideoWidget())
+      videoWidget(new MyVideoWidget()),
+      timer(new QTimer())
 {
     ui->setupUi(this);
     player->setVideoOutput(videoWidget);
 
+    timer->setInterval(1000);
 
-    connect(ui->playButton, &QPushButton::clicked, player, &QMediaPlayer::play);
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateTimeLabel);
+    connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::onPlayButtonClicked);
 //    connect(ui->stopButton, &QPushButton::clicked, player, &QMediaPlayer::stop);
     connect(ui->stopButton, &QPushButton::clicked, this, &MainWindow::onStop);
     connect(ui->pauseButton, &QPushButton::clicked, player, &QMediaPlayer::pause);
@@ -29,6 +33,23 @@ MainWindow::MainWindow(QWidget *parent)
     initializeUI();
     qDebug() << "Current working directory:" << QDir::currentPath();
     bool styleSheetLoaded=loadStyleSheet();
+}
+
+void MainWindow::updateTimeLabel() {
+    qint64 position=player->position();
+    qint64 duration = player->duration();
+    QTime time = QTime::fromMSecsSinceStartOfDay(position);
+    QString finalTimeLabel="";
+    finalTimeLabel.append(time.toString("hh:mm:ss"));
+    time = QTime::fromMSecsSinceStartOfDay(duration);
+    finalTimeLabel.append("/"+time.toString("hh:mm:ss"));
+    ui->timeLabel->setText(finalTimeLabel);
+}
+
+void MainWindow::onPlayButtonClicked() {
+    player->play();
+    timer->start();
+
 }
 
 void MainWindow::setRange(qint64 duration) {
@@ -50,6 +71,7 @@ MainWindow::~MainWindow()
 {
     if(videoWidget)delete videoWidget;
     if(player)delete player;
+    if(timer)delete timer;
     delete ui;
 }
 
@@ -62,10 +84,12 @@ bool MainWindow::loadStyleSheet()
         ui->pauseButton->setStyleSheet(styleSheet);
         ui->stopButton->setStyleSheet(styleSheet);
         ui->centralwidget->setStyleSheet(styleSheet);
+        ui->timeLabel->setStyleSheet(styleSheet);
         ui->playButton->setObjectName("PlaybackButton");
         ui->pauseButton->setObjectName("PlaybackButton");
         ui->stopButton->setObjectName("PlaybackButton");
         ui->centralwidget->setObjectName("centralWidget");
+        ui->timeLabel->setObjectName("TimeAndDuration");
         styleFile.close();
         return true;
     }

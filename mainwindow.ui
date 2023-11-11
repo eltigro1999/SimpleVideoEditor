@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8,1,2">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8,0,2">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
@@ -30,11 +30,25 @@
      <layout class="QHBoxLayout" name="videoLayout"/>
     </item>
     <item>
-     <widget class="QSlider" name="seekSlider">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="topMargin">
+       <number>0</number>
       </property>
-     </widget>
+      <item>
+       <widget class="QSlider" name="seekSlider">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="timeLabel">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">

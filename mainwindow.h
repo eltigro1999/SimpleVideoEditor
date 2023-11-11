@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include "myvideowidget.h"
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,11 +24,14 @@ private:
     QMediaPlayer* player;
     MyVideoWidget* videoWidget;
     QString styleSheet;
+    QTimer* timer;
 
     bool loadStyleSheet();
     void initializeUI();
 
 private slots:
+    void updateTimeLabel();
+    void onPlayButtonClicked();
     void changeVolume(const int& volume);
     void updateSlider(qint64 position);
     void on_openButton_clicked();

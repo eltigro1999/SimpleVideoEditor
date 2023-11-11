@@ -12,3 +12,7 @@ color: #DEE5E5;
 QWidget#centralWidget{
 background-color:black;
 }
+
+QLabel#TimeAndDuration{
+color: #DEE5E5;
+}

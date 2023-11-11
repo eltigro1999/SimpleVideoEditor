@@ -1,0 +1,14 @@
+QPushButton#PlaybackButton {
+border-radius: 6px;
+background-color: #DEE5E5;
+height: 20px;
+transition: background-color 0.4s ease;
+}
+QPushButton#PlaybackButton:hover {
+background-color: black;
+color: #DEE5E5;
+}
+
+QWidget#centralWidget{
+background-color:black;
+}

@@ -121,6 +121,7 @@ void MainWindow::initializeUI()
     ui->seekSlider->setPageStep(5000);   // Page step by 5 seconds
 
     ui->videoLayout->addWidget(videoWidget);
+
 }
 
 void MainWindow::changeVolume(const int& volume) {

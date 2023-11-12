@@ -13,11 +13,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    myvideowidget.cpp
+    myvideowidget.cpp \
+    speedmenu.cpp
 
 HEADERS += \
     mainwindow.h \
-    myvideowidget.h
+    myvideowidget.h \
+    speedmenu.h
 
 FORMS += \
     mainwindow.ui

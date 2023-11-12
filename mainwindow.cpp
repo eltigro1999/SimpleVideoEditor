@@ -96,12 +96,16 @@ bool MainWindow::loadStyleSheet()
         ui->centralwidget->setStyleSheet(styleSheet);
         ui->timeLabel->setStyleSheet(styleSheet);
         ui->seekSlider->setStyleSheet(styleSheet);
+        ui->volumeSlider->setStyleSheet(styleSheet);
+
         ui->playButton->setObjectName("PlaybackButton");
         ui->pauseButton->setObjectName("PlaybackButton");
         ui->stopButton->setObjectName("PlaybackButton");
         ui->centralwidget->setObjectName("centralWidget");
         ui->timeLabel->setObjectName("TimeAndDuration");
         ui->seekSlider->setObjectName("seekSlider");
+        ui->volumeSlider->setObjectName("volumeSlider");
+
         styleFile.close();
         return true;
     }

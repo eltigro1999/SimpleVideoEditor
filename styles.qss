@@ -37,3 +37,22 @@ QSlider#seekSlider::handle:horizontal:hover {
     background: #0056b3; /* Color of the slider handle on hover */
     border: 1px solid #0056b3; /* Border color of the slider handle on hover */
 }
+
+QSlider#volumeSlider {
+    background: #C0C0C0; /* Background color of the slider track */
+}
+
+QSlider#volumeSlider::groove:vertical{
+    background:#DEE5E5;  /* Border color of the groove (track) */
+}
+
+QSlider#volumeSlider::handle:vertical{
+    background: #087E8B; /* Color of the slider handle */
+    height:10px;
+}
+
+QSlider#volumeSlider::handle:vertical:hover {
+    background: #0056b3; /* Color of the slider handle on hover */
+    border: 1px solid #0056b3; /* Border color of the slider handle on hover */
+}
+
